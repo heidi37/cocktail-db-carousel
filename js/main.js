@@ -4,9 +4,11 @@
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 let drinksArray = []
 let carouselPos = ""
+let intervalId = ""
 
 // original render
-document.querySelector("button").addEventListener('click', function(){
+document.querySelector("#getCocktail").addEventListener('click', function(){
+  localStorage.removeItem('drinksArray')
   carouselPos = 0
   let drink = document.querySelector("input").value
   fetch(url + drink)
@@ -21,14 +23,28 @@ document.querySelector("button").addEventListener('click', function(){
 
 //carousels the results
 //const intervalId = setInterval(carouselDrinks, 1000)
+document.querySelector('#startCarousel').addEventListener('click', function(){
+  intervalId = setInterval(carouselDrinks, 2000)
+})
 
 function carouselDrinks(){
+  document.querySelector('#startCarousel').style.display = "none"
+  document.querySelector('#stopCarousel').style.display = "inline-block"
   let retrievedDrinksArray = JSON.parse(localStorage.getItem('drinksArray'));
   if(carouselPos > retrievedDrinksArray.drinks.length - 1){
     carouselPos = 0
   } 
   renderDrinks(retrievedDrinksArray.drinks)
   carouselPos ++;
+}
+
+document.querySelector('#stopCarousel').addEventListener('click', stopCarouselDrinks)
+
+function stopCarouselDrinks(){
+  document.querySelector('#startCarousel').style.display = "inline-block"
+  document.querySelector('#stopCarousel').style.display = "none"
+  clearInterval(intervalId)
+  carouselPos --;
 }
 
 
@@ -59,7 +75,7 @@ function renderDrinks(array){
   document.querySelector("h2").innerText = array[carouselPos].strDrink
   document.querySelector("img").src = array[carouselPos].strDrinkThumb
   document.querySelector(".instructions").innerText = `${array[carouselPos].strInstructions}`
-  document.querySelector('#counter').innerHTML = `<p><strong>${carouselPos + 1}</strong> of <strong>${array.length}</strong></p>`
+  document.querySelector('#counter').innerHTML = `<p><strong><span class="numberColor">${carouselPos + 1}</span></strong> of <strong>${array.length}</strong></p>`
   document.querySelector(".output").style.display = "flex"
   document.getElementById("ingredientList").innerHTML = ""
   getIngredients(array)

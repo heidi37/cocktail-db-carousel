@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
+    <link
       rel="stylesheet"
       id="font-awesome-css"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css?ver=6.5.1"
@@ -24,26 +24,36 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-		<main>
-    <h1>Which Cocktail?</h1>
-    <div class="input"><input type="text" name="" value="" /><button type="button" name="button">Get Cocktail</button></div>
-    <div class="output">
-      <h2>Name</h2>
-    <img src="" alt="" />
-    <div class="controls">
-      <p id="counter"></p>
-      <div>
-			<i class="fa-solid fa-less-than left"></i>
-			<span>&nbsp;</span>
-			<i class="fa-solid fa-greater-than right"></i>
+    <main>
+      <h1>Which Cocktail?</h1>
+      <div class="input">
+        <input type="text" name="" value="" /><button
+          type="button"
+          name="button"
+          id="getCocktail"
+        >
+          Get Cocktail
+        </button>
       </div>
-		</div>
-    <h3>Ingredients</h3>
-    <ul id="ingredientList"></ul>
-    <h3>Instructions</h3>
-    <p class="instructions"></p>
-    </div>
-		</main>
+      <div class="output">
+        <div class="titleAndButton">
+        <h2>Name</h2><button id="startCarousel">🏁</button><button id="stopCarousel">🛑</button>
+        </div>
+        <img src="" alt="" />
+        <div class="controls">
+          <p id="counter"></p>
+          <div>
+            <i class="fa-solid fa-less-than left"></i>
+            <span>&nbsp;</span>
+            <i class="fa-solid fa-greater-than right"></i>
+          </div>
+        </div>
+        <h3>Ingredients</h3>
+        <ul id="ingredientList"></ul>
+        <h3>Instructions</h3>
+        <p class="instructions"></p>
+      </div>
+    </main>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
