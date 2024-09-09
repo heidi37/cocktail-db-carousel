@@ -1,9 +1,11 @@
 //The user will enter a cocktail. Get a cocktail name, photo, and instructions and place them in the DOM
 
+//global variables
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 let drinksArray = []
 let carouselPos = ""
 
+// original render
 document.querySelector("button").addEventListener('click', function(){
   carouselPos = 0
   let drink = document.querySelector("input").value
@@ -17,6 +19,20 @@ document.querySelector("button").addEventListener('click', function(){
   })
 })
 
+//carousels the results
+//const intervalId = setInterval(carouselDrinks, 1000)
+
+function carouselDrinks(){
+  let retrievedDrinksArray = JSON.parse(localStorage.getItem('drinksArray'));
+  if(carouselPos > retrievedDrinksArray.drinks.length - 1){
+    carouselPos = 0
+  } 
+  renderDrinks(retrievedDrinksArray.drinks)
+  carouselPos ++;
+}
+
+
+//right arrow click to advance
 document.querySelector(".right").addEventListener('click', function(drinksArray){
   let retrievedDrinksArray = JSON.parse(localStorage.getItem('drinksArray'));
   carouselPos ++;
@@ -26,6 +42,7 @@ document.querySelector(".right").addEventListener('click', function(drinksArray)
   renderDrinks(retrievedDrinksArray.drinks)  
 })
 
+//left arrow click to go back
 document.querySelector(".left").addEventListener('click', function(drinksArray){
   console.log(carouselPos)
   let retrievedDrinksArray = JSON.parse(localStorage.getItem('drinksArray'));
@@ -37,6 +54,7 @@ document.querySelector(".left").addEventListener('click', function(drinksArray){
   renderDrinks(retrievedDrinksArray.drinks)
 })
 
+//renders the individual drink info
 function renderDrinks(array){
   document.querySelector("h2").innerText = array[carouselPos].strDrink
   document.querySelector("img").src = array[carouselPos].strDrinkThumb
@@ -47,6 +65,7 @@ function renderDrinks(array){
   getIngredients(array)
 }
 
+//grabs the drink ingredients from the 16 drink properties if not null
 function getIngredients(array){
   console.log("get ingredients", array)
   const ul = document.getElementById("ingredientList")
